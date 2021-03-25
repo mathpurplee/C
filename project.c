@@ -4,18 +4,17 @@
 
 int main()
 {
-	float kg = 0;
-	float ms = 0;
-	float energy = 0;
+	int mae = 0;
+	int jill = 0;
+	double nong = 100;
 
-	printf("질량(kg)? : ");
-	scanf("%f", &kg);
-	printf("속력(m/s)? : ");
-	scanf("%f", &ms);
-	
-	ms = pow(ms,2); // 또는 ms *= ms
-	energy = (1.0 / 2.0) * kg * ms;
 
-	printf("운동에너지 : %.2f J", energy);
-	return 0;
+	printf("용매? : ");
+	scanf("%d", &mae);
+	printf("용질? : ");
+	scanf("%d", &jill);
+
+	nong *= (double)jill / (mae + jill); // 피연산자 중 하나를 double로 형변환하면 몫을 실수로 구할 수 있음
+
+	printf("농도 : %.2lf %", nong);
 }
