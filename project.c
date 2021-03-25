@@ -3,13 +3,12 @@
 
 int main()
 {
-	double mass = 0;
-	double volume = 0;
+	double kwh = 0;
+	double hwh = 190;
 
-	printf("질량(g)? : ");
-	scanf("%lf", &mass);
-	printf("부피? : ");
-	scanf("%lf", &volume);
-	double density = mass / volume;
-	printf("밀도 : %lf", density);
+	printf("월 사용량(kwh)? : ");
+	scanf("%lf", &kwh);
+	double rate = kwh * hwh;
+	printf("전기 요금 : %.lf원", rate);
+	return 0;
 }
