@@ -3,11 +3,13 @@
 
 int main()
 {
-	int month;
+	double fc = 0;
+	double cc = 0;
 
-	printf("몇 월? : ");
-	scanf("%d", &month);
+	printf("화씨 온도? : ");
+	scanf("%lf", &fc);
+	cc = (fc - 32) * (5.0 / 9.0);
 
-	month > 0 && month < 13 ? printf("%d월 입니다.", month) : printf("잘못된 값입니다.");
+	printf("%.lf F = %.2lf", fc, cc);
 	return 0;
 }
