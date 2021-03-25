@@ -3,14 +3,14 @@
 
 int main()
 {
-	float pi1 = 3.14159265;
-	double pi2 = 3.14159265;
+	int x;
+	printf("8진수로 입력하려면 012, 16진수로 입력하려면 0x12처럼 입력하세요.\n정수? ");
+	scanf("%i", &x); // 0x12 입력
 
-	printf("pi = %.2f\n", pi1);
-	printf("pi = %.4f\n", pi1);
-	printf("pi = %.6f\n", pi1);  // 플롯 유효자릿수 7
-	printf("pi = %.8f\n", pi2);  // 더블 유효자릿수 16
-	printf("pi = %e\n", pi2);
+	printf("8진수 : %#o\n", x); // 022
+	printf("10진수 : %d\n", x); // 18
+	printf("16진수 : %#x\n", x); // 0x12
 	return 0;
+
 
 }
