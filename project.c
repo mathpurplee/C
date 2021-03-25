@@ -1,20 +1,23 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int main()
-{
-	unsigned int num = 0;
-	unsigned int byte_0 = 0x000000ff;
-	unsigned int byte_1 = 0x0000ff00;
-	unsigned int byte_2 = 0x00ff0000;
-	unsigned int byte_3 = 0xff000000;
-	
-	printf("16진수로 데이터를 입력하세요 : ");
-	scanf("%x", &num);
+int main() {
+	unsigned int red = 0, green = 0, blue = 0, result = 0;
+	printf("red? : ");
+	scanf("%d", &red);
+	printf("green? : ");
+	scanf("%d", &green);
+	printf("blue? : ");
+	scanf("%d", &blue);
 
-	printf("byte 0 : %8x\n", num & byte_0);
-	printf("byte 1 : %8x\n", num & byte_1);
-	printf("byte 2 : %8x\n", num & byte_2);
-	printf("byte 3 : %8x\n", num & byte_3);
+	if (red > 255)
+		red = 0;
+	else if (green > 255)
+		green = 0;
+	else if (blue > 255)
+		blue = 0;
+
+	result = red | (green << 8) | (blue << 16);
+	printf("%X", result);
 	return 0;
 }
