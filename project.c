@@ -1,16 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <math.h>
 
 int main()
 {
-	int x;
-	printf("8진수로 입력하려면 012, 16진수로 입력하려면 0x12처럼 입력하세요.\n정수? ");
-	scanf("%i", &x); // 0x12 입력
+	double x = 0;
 
-	printf("8진수 : %#o\n", x); // 022
-	printf("10진수 : %d\n", x); // 18
-	printf("16진수 : %#x\n", x); // 0x12
+	printf("실수? : ");
+	scanf("%lf", &x);
+
+	printf("제곱 : %e\n", pow(x, 2));
+	printf("세제곱 : %e\n", pow(x, 3));
+
 	return 0;
-
-
 }
