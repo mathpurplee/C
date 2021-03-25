@@ -4,24 +4,17 @@
 
 int main()
 {
-	int time = 0;
+	int price = 0;
+	int rate = 0;
+	double discount = 0;
 
-	int si = 0;
-	int bun = 0;
-	int cho = 0;
-
-	printf("재생 시간(초)? : ");
-	scanf("%d", &time);
-
-	cho = time % 60;
-	time /= 60;
-	bun = time % 60;
-	si = time / 60;
+	printf("제품의 가격? : ");
+	scanf("%d", &price);
+	printf("할인율? : ");
+	scanf("%d", &rate);
 	
-	printf("재생 시간은 %d시간 %d분 %d초입니다.", si, bun, cho);
-	return 0;
-
-
-
+	discount = (double)rate / 100; // 형 변환 
+	
+	printf("할인가 : %.lf원 (%.lf원 할인)", price-(discount*price), discount*price);
 	
 }
