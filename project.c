@@ -3,17 +3,11 @@
 
 int main()
 {
-	double kwh = 0;
-	double rate;
+	int month;
 
-	printf("기본 요금? : ");
-	scanf("%lf", &rate);
-	printf("월 사용량(kwh)? : ");
-	scanf("%lf", &kwh);
-	kwh *= 190;
-	rate += kwh;
-	printf("전기 요금 : %.lf원", rate);
+	printf("몇 월? : ");
+	scanf("%d", &month);
+
+	month > 0 && month < 13 ? printf("%d월 입니다.", month) : printf("잘못된 값입니다.");
 	return 0;
-
-
 }
