@@ -2,22 +2,14 @@
 #include <stdio.h>
 
 int main() {
-	unsigned int red = 0, green = 0, blue = 0, result = 0;
-	printf("red? : ");
-	scanf("%d", &red);
-	printf("green? : ");
-	scanf("%d", &green);
-	printf("blue? : ");
-	scanf("%d", &blue);
+    unsigned int num;
 
-	if (red > 255)
-		red = 0;
-	else if (green > 255)
-		green = 0;
-	else if (blue > 255)
-		blue = 0;
+    printf("16진수로 데이터를 입력하세요 : ");
+    scanf("%x", &num);
 
-	result = red | (green << 8) | (blue << 16);
-	printf("%X", result);
-	return 0;
+    for (int i = 0; i <= 3; i++) {
+        printf("byte %d : %02x\n", i, (num >> i * 8) & 0x000000FF);
+    }
+
+    return 0;
 }
