@@ -2,14 +2,13 @@
 #include <stdio.h>
 
 int main() {
-    unsigned int num;
+	int x1, x2, y1, y2;
+	double m = 0;
 
-    printf("16진수로 데이터를 입력하세요 : ");
-    scanf("%x", &num);
-
-    for (int i = 0; i <= 3; i++) {
-        printf("byte %d : %02x\n", i, (num >> i * 8) & 0x000000FF);
-    }
-
-    return 0;
+	printf("A의 좌표 (x1, y1)? : ");
+	scanf("%d %d", &x1, &y1);
+	printf("B의 좌표 (x2, y2)? : ");
+	scanf("%d %d", &x2, &y2);
+	m = (double)(y2 - y1) / (x2 - x1);
+	printf("직선의 기울기 : %.6lf", m);
 }
