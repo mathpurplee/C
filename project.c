@@ -2,22 +2,16 @@
 #include <stdio.h>
 
 int main() {
-	int score = 0;
+	int interger = 0;
+	int num = 0;
 
-	printf("점수? : ");
-	scanf("%d", &score);
+	printf("양의 정수? : ");
+	scanf("%d", &interger);
+	printf("배수의 개수? : ");
+	scanf("%d", &num);
 
-	if (score >= 90 && score <= 100)
-		printf("학점 : A");
-	else if (score >= 80 && score < 90)
-		printf("학점 : B");
-	else if (score >= 70 && score < 80)
-		printf("학점 : C");
-	else if (score >= 60 && score < 70)
-		printf("학점 : D");
-	else if (score >= 0 && score < 60)
-		printf("학점 : F");
-	else
-		printf("다시 입력하세요.");
+	for (int i = 1; i < num + 1; i++)
+		printf("%d ", interger * i);
+
 	return 0;
 }
