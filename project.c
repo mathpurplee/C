@@ -2,23 +2,21 @@
 #include <stdio.h>
 
 int main() {
-	int interger, i, j;
+	int num = 0;
 	int count = 0;
+	double sum = 0;
 
-	printf("양의 정수? : ");
-	scanf("%d", &interger);
+	printf("정수 입력 : ");
+	scanf("%d", &num);
 
-	for (i = 2; i < interger; i++) {
-		for (j = 2; j < i; j++) {
-			if (i % j == 0)
-				break;
-		}
-		if (i == j) {
-			printf("%2d ", i);
+	for (int i = 0; i <= num; i++) {
+		if (i % 2 == 1) {
+			sum += i;
 			count++;
-			if (count % 10 == 0)
-				printf("\n");
 		}
 	}
+
+	printf("홀수의 합 : %.lf\n", sum);
+	printf("평균 : %.lf\n", sum / count);
 }
 
