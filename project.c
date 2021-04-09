@@ -1,19 +1,27 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
 
-double distance(double x1, double y1, double x2, double y2)
+int select = 1;
+
+void menu(void)
 {
-	return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+	printf("[1.파일 열기 2.파일 저장 3.인쇄 0.종료] 선택? : ");
+	scanf("%d", &select);
+	if (select == 0)
+		exit(0);
+	else if (select == 1)
+		printf("파일 열기를 수행합니다.\n");
+	else if (select == 2)
+		printf("파일 저장을 수행합니다.\n");
+	else if (select == 3)
+		printf("파일 인쇄를 수행합니다.\n");
+	else
+		printf("0-3번 중 입력하세요.\n");
 }
 
-int main()
-{
-	double x1, x2, y1, y2;
-	printf("직선의 시작점 좌표? : ");
-	scanf("%lf %lf", &x1, &y1);
-	printf("직선의 끝점 좌표? : ");
-	scanf("%lf %lf", &x2, &y2);
-	double res = distance(x1, y1, x2, y2);
-	printf("(%.lf, %.lf)~(%.lf, %.lf) 직선의 길이 : %.6lf", x1, y1, x2, y2, res);
+int main(void) {
+	while (select != 0)
+		menu();
 }
+
