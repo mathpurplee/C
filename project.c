@@ -1,27 +1,25 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <stdlib.h>
 
-int select = 1;
 
-void menu(void)
+int find_leap_year(int year)
 {
-	printf("[1.파일 열기 2.파일 저장 3.인쇄 0.종료] 선택? : ");
-	scanf("%d", &select);
-	if (select == 0)
-		exit(0);
-	else if (select == 1)
-		printf("파일 열기를 수행합니다.\n");
-	else if (select == 2)
-		printf("파일 저장을 수행합니다.\n");
-	else if (select == 3)
-		printf("파일 인쇄를 수행합니다.\n");
+	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+		return 366;
 	else
-		printf("0-3번 중 입력하세요.\n");
+		return 365;
+}
+int main()
+{
+	int count = 0;
+	for (int i = 2000; i < 2100; i++) {
+		if (find_leap_year(i) == 366) {
+			printf("%d ", i);
+			count++;
+			if (count % 10 == 0)
+				printf("\n");
+		}
+	}
 }
 
-int main(void) {
-	while (select != 0)
-		menu();
-}
 
