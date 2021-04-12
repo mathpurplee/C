@@ -1,23 +1,22 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <stdlib.h>
-
-int convert_binary(int x);
-char hex[20];
+#include <math.h>
 
 int main()
 {
-    int input_hex;
+	int a1 = 0, common_ratio = 0;
+	printf("첫 번째 항? : ");
+	scanf("%d", &a1);
+	printf("공비? : ");
+	scanf("%d", &common_ratio);
+	printf("등비수열 : ");
 
-    printf("정수? : ");
-    scanf("%x", &input_hex);
-    convert_binary(input_hex);
-
-    return 0;
-}
-
-int convert_binary(int x)
-{
-    long ouptput_bin = _itoa(x, hex, 2);
-    printf("16진수 %X : %s", x, ouptput_bin);
+	double geometric_sequence[10];
+	for (int i = 0; i < 10; i++) {
+		geometric_sequence[i] = (double)a1 * pow(common_ratio, i);
+		if (i > 7) 
+			printf("%.5e ", geometric_sequence[i]);
+		else
+			printf("%.f ", geometric_sequence[i]);
+	}
 }
