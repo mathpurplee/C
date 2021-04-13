@@ -1,22 +1,33 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <math.h>
+
+void print_array(int array[], int size)
+{
+	printf("배열 : ");
+	for (int i = 0; i < size; i++)
+		printf("%d ", array[i]);
+	printf("\n");
+}
 
 int main()
 {
-	int a1 = 0, common_ratio = 0;
-	printf("첫 번째 항? : ");
-	scanf("%d", &a1);
-	printf("공비? : ");
-	scanf("%d", &common_ratio);
-	printf("등비수열 : ");
+	int arr[10] = { 23, 45, 62, 12, 99, 83, 23, 50, 12, 37 };
+	int arr_size = sizeof(arr) / sizeof(arr[0]);
+	int num = 0;
 
-	double geometric_sequence[10];
-	for (int i = 0; i < 10; i++) {
-		geometric_sequence[i] = (double)a1 * pow(common_ratio, i);
-		if (i > 7) 
-			printf("%.5e ", geometric_sequence[i]);
-		else
-			printf("%.f ", geometric_sequence[i]);
+	print_array(arr, arr_size);
+
+	printf("찾을 값? : ");
+	scanf("%d", &num);
+
+	for (int i = 9; i >= 0; i--) {
+		if (arr[i] == num) {
+			printf("%d는 %d번째 원소입니다.", num, i);
+			break;
+		}
+		else if(arr[i] != num && i<=0)
+			printf("입력한 원소를 찾을 수 없습니다.");
 	}
 }
+
+
