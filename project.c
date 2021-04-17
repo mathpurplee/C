@@ -1,36 +1,42 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int find_max(int arr[], int size)
+void print_array(char arr[], int size)
 {
-	int max = 0;  // 최대값을 저장할 변수
+	printf("[");
 	for (int i = 0; i < size; i++) {
-		if (max < arr[i])
-			max = arr[i];
+		printf("%c ", arr[i]);
 	}
-	return max;
-}
-
-int find_min(int arr[], int size)
-{
-	int min = arr[0];   // 최소값을 저장할 변수
-	for (int i = 0; i < size; i++) {
-		if (min >= arr[i])
-			min = arr[i];
-	}
-	return min;
+	printf("]\n");
 }
 
 int main()
 {
-	int arr[10] = { 23, 45, 62, 12, 99, 83, 23, 50, 72, 37 };
-	printf("배열 : ");
-	for (int i = 0; i < 10; i++) {   // 배열 출력
-		printf("%d ", arr[i]);
+	char seat[10] = "0000000000";
+	int reserve = 0;          // 입력받을 예매 좌석 수
+	int be_reserved = 0;    // 이미 예매된 좌석 수
+	int can_reserve = 10;   // 남은 예매 가능한 좌석 수 
+
+	while (be_reserved != 10) {
+		print_array(seat, 10);
+		printf("예매할 좌석 수? : ");
+		scanf("%d", &reserve);
+
+		if ((be_reserved + reserve) <= 10)
+		{
+			for (int i = be_reserved; i < be_reserved + reserve; i++)
+			{
+				seat[i] = 88;
+				printf("%d ", i + 1);
+			}
+			printf("번 좌석을 예매했습니다.\n");
+			be_reserved += reserve;
+			can_reserve -= be_reserved;
+		}
+		else if ((be_reserved + reserve) > 10)
+		{
+			printf("남은 좌석수가 %d이므로 %d좌석을 예매할 수 없습니다.", can_reserve, reserve);
+			break;
+		}
 	}
-	printf("\n");
-	printf("최대값 : %d\n", find_max(arr, 10));
-	printf("최소값 : %d\n", find_min(arr, 10));
-
-
 }
