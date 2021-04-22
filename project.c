@@ -1,28 +1,24 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int i;
+int get_seconds(int, int, int);
 
-void print_arr(double arr[], int size)
+int main(void)
 {
-	for (i = 0; i < size; i++)
-		printf("%.1f ", arr[i]);
-	printf("\n");
+	int hour, min, sec;
+
+	printf("시간, 분, 초를 입력 : ");
+	scanf("%d %d %d", &hour, &min, &sec);
+	printf("%d시간 %d분 %d초 = %d초", hour, min, sec, get_seconds(hour, min, sec));
 }
 
-int main()
+int get_seconds(int hour, int min, int sec)
 {
-	double arr[10] = { 1.2, 3.1, 4.3, 4.5, 6.7, 2.3, 8.7, 9.5, 2.3, 5.8 };
-	double adverse_arr[10] = { 0 };
+	int result = 0;
+	result += hour * 60 * 60;
+	result += min * 60;
+	result += sec;
+	return result;
 
-	for (i = 0; i < 10; i++) {
-		adverse_arr[i] = arr[9 - i];
-	}
-
-	printf("배열 : ");
-	print_arr(arr, 10);
-	printf("역순 : ");
-	print_arr(adverse_arr, 10);
 }
-
 
