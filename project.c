@@ -1,29 +1,32 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#define ROW 3
-#define COL 5
+#define SIZE 10
+int i;
 
-void memory_map(int* p, int row, int val);
+void make_sequence(int* arr, int size, int value);
 
-int main()
-{
-	int arr[ROW][COL] = { 0 };
-	int val = 0;
-	int row = 0;
-	
-	printf("배열의 원소에 저장할 값? : ");
-	scanf("%d", &val);
-	for (row = 0; row < ROW; row++) {
-		memory_map(arr[row], row, val);
-		printf("\n");
-	}
+int main(void) {
+    int arr[SIZE] = { 0 };
+    int diff;
+    printf("배열 arr의 주소 = %d, arr[0] = %d\n", arr, arr[0]);
+
+    printf("첫 번째 항? ");
+    scanf("%d", &arr[0]);
+    printf("공차? ");
+    scanf("%d", &diff);
+
+    make_sequence(arr, SIZE, diff);
+
+    printf("<등차수열>\n");
+    for (i = 0; i < SIZE; i++) {
+        printf("배열 arr[%d]의 주소 = %d, data = %2d\n", i, &arr[i], arr[i]);
+    }
+    printf("\n");
 }
 
-void memory_map(int* p, int row, int val)
+void make_sequence(int* arr, int size, int value)
 {
-	printf("포인터 p의 주소 = %d, data = %d\n", &p, p);
-	for (int col = 0; col < COL; col++) {
-	*(p+col) = val;
-		printf("배열 arr[%d][%d]의 주소 = %d, data = %d\n", row, col, &p[col], *(p+col));
-	}
+    printf("포인터 arr의 주소 = %d, data = %d\n", &arr, arr);
+    for (i = 1; i < size; i++)
+        arr[i] = arr[i - 1] + value;         
 }
