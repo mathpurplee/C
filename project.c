@@ -1,32 +1,42 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#define SIZE 10
-int i;
+#include <string.h>
+#include <ctype.h>
 
-void make_sequence(int* arr, int size, int value);
-
-int main(void) {
-    int arr[SIZE] = { 0 };
-    int diff;
-    printf("배열 arr의 주소 = %d, arr[0] = %d\n", arr, arr[0]);
-
-    printf("첫 번째 항? ");
-    scanf("%d", &arr[0]);
-    printf("공차? ");
-    scanf("%d", &diff);
-
-    make_sequence(arr, SIZE, diff);
-
-    printf("<등차수열>\n");
-    for (i = 0; i < SIZE; i++) {
-        printf("배열 arr[%d]의 주소 = %d, data = %2d\n", i, &arr[i], arr[i]);
-    }
-    printf("\n");
-}
-
-void make_sequence(int* arr, int size, int value)
+int main()
 {
-    printf("포인터 arr의 주소 = %d, data = %d\n", &arr, arr);
-    for (i = 1; i < size; i++)
-        arr[i] = arr[i - 1] + value;         
+	char FileName[20] = "";
+	char FileExtension[5] = "";
+	char File[30] = "";
+
+	for (int i = 0; i < 20; i++)
+		printf("FileName[%2d]의 주소 = %d, data = %c\n", i, &FileName[i], FileName[i]);
+	printf("\n");
+	for (int i = 0; i < 5; i++)
+		printf("FileExtension[%d]의 주소 = %d, data = %c\n", i, &FileExtension[i], FileExtension[i]);
+	printf("\n");
+	for (int i = 0; i < 20; i++)
+		printf("File[%2d]의 주소 = %d, data = %c\n", i, &File[i], File[i]);
+	printf("\n");
+
+	printf("파일명? ");
+	gets(FileName);
+	printf("확장자? ");
+	gets(FileExtension);
+
+	strcpy(File, FileName);
+	strcat(File, ".");
+	strcat(File, FileExtension);
+
+	printf("전체 파일명 : %s\n", File);
+
+	for (int i = 0; i < 20; i++)
+		printf("FileName[%2d]의 주소 = %d, data = %c\n", i, &FileName[i], FileName[i]);
+	printf("\n");
+	for (int i = 0; i < 5; i++)
+		printf("FileExtension[%d]의 주소 = %d, data = %c\n", i, &FileExtension[i], FileExtension[i]);
+	printf("\n");
+	for (int i = 0; i < 20; i++)
+		printf("File[%2d]의 주소 = %d, data = %c\n", i, &File[i], File[i]);
+	printf("\n");
 }
