@@ -2,35 +2,40 @@
 #include <stdio.h>
 #include <string.h>
 
-struct content {
-	char title[40];
-	int price;
-	double rate;
+struct point {
+	int x, y;
 };
+void print_point(const struct point* ptr); // ptr은 입력 매개변수
+void move_point(struct point* ptr, int offset); // ptr은 입출력 매개변수
 
-int main(void)
+int main()
 {
-	struct content arr[] = {
-		{"Avengers", 1000, 8.8}, {"Aquaman", 550, 7.1}, {"Shazam!", 7700, 7.4},
-		{"X-Men", 3300, 8.0}, {"US", 8800, 7.1}, {"Inception", 2200, 8.7}
+	struct point arr[] = {
+		{10, 20}, {35, 41}, {12, 63}, {72, 55}, {92, 86}, {4, 27}
 	};
 	int size = sizeof(arr) / sizeof(arr[0]);
-	printf("size = %d\n", size); // 6
-	printf("sizeof(arr) = %d\n", sizeof(arr)); // 336
-	printf("sizeof(arr[0]) = %d\n", sizeof(arr[0])); // 56
-
-	int i;             // 찾을 구조체 배열 원소의 인덱스
-	char title[40];  // 검색할 콘텐츠 제목을 저장할 변수
-
-	printf("제목? ");
-	gets(title);
+	int i, offset;
 
 	for (i = 0; i < size; i++) {
-		if (strcmp(arr[i].title, title) == 0) 
-			break;
+		print_point(&arr[i]);
 	}
-	if (i == size)
-		printf("해당 콘텐츠를 찾을 수 없습니다.");
-	else
-		printf("%s의 가격 = %d, 평점 = %.1f\n", arr[i].title, arr[i].price, arr[i].rate);
+	printf("\n");
+
+	printf("이동할 오프셋? ");
+	scanf("%d", &offset);
+	for (i = 0; i < size; i++) {
+		move_point(&arr[i], offset);
+		print_point(&arr[i]);
+	}
+}
+
+void print_point(const struct point* ptr)
+{
+	printf("(%d, %d) ", ptr->x, ptr->y);
+}
+
+void move_point(struct point* ptr, int offset)
+{
+	ptr->x += offset;
+	ptr->y += offset;
 }
