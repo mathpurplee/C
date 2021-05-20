@@ -1,27 +1,36 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 
-int main()
+struct content {
+	char title[40];
+	int price;
+	double rate;
+};
+
+int main(void)
 {
-	char str[70] = "";
-	int NumOfAlpha = 0;
+	struct content arr[] = {
+		{"Avengers", 1000, 8.8}, {"Aquaman", 550, 7.1}, {"Shazam!", 7700, 7.4},
+		{"X-Men", 3300, 8.0}, {"US", 8800, 7.1}, {"Inception", 2200, 8.7}
+	};
+	int size = sizeof(arr) / sizeof(arr[0]);
+	printf("size = %d\n", size); // 6
+	printf("sizeof(arr) = %d\n", sizeof(arr)); // 336
+	printf("sizeof(arr[0]) = %d\n", sizeof(arr[0])); // 56
 
-	for (int i = 0; i < 70; i++)       //     문자열 입력 전 memory 출력
-		printf("str[%2d]의 주소 = %d, data = %c\n", i, &str[i], str[i]);
-	printf("변수 NumOfAlpha의 주소 = %d, data = %d\n", &NumOfAlpha, NumOfAlpha);
+	int i;             // 찾을 구조체 배열 원소의 인덱스
+	char title[40];  // 검색할 콘텐츠 제목을 저장할 변수
 
-	printf("문자열? ");
-	gets(str);
+	printf("제목? ");
+	gets(title);
 
-	for (int i = 0; i < strlen(str); i++) {
-		if (isalpha(str[i]))
-			NumOfAlpha++;
+	for (i = 0; i < size; i++) {
+		if (strcmp(arr[i].title, title) == 0) 
+			break;
 	}
-	printf("영문자의 개수 : %d\n", NumOfAlpha);
-
-	for (int i = 0; i < 70; i++)       //     문자열 입력 후 memory 출력
-		printf("str[%2d]의 주소 = %d, data = %c\n", i, &str[i], str[i]);
-	printf("변수 NumOfAlpha의 주소 = %d, data = %d\n", &NumOfAlpha, NumOfAlpha);
+	if (i == size)
+		printf("해당 콘텐츠를 찾을 수 없습니다.");
+	else
+		printf("%s의 가격 = %d, 평점 = %.1f\n", arr[i].title, arr[i].price, arr[i].rate);
 }
