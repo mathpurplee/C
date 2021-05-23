@@ -5,37 +5,20 @@
 struct point {
 	int x, y;
 };
-void print_point(const struct point* ptr); // ptr은 입력 매개변수
-void move_point(struct point* ptr, int offset); // ptr은 입출력 매개변수
+struct rect {
+	struct point left_bottom, right_bottom;
+};
+print_rect_info(const struct rect* r)
+{
+	printf("[RECT 좌하단점 : (%d, %d) 우상단점 : (%d, %d)]", r->left_bottom.x, r->left_bottom.y, r->right_bottom.x, r->right_bottom.y);
+}
 
 int main()
 {
-	struct point arr[] = {
-		{10, 20}, {35, 41}, {12, 63}, {72, 55}, {92, 86}, {4, 27}
-	};
-	int size = sizeof(arr) / sizeof(arr[0]);
-	int i, offset;
-
-	for (i = 0; i < size; i++) {
-		print_point(&arr[i]);
-	}
-	printf("\n");
-
-	printf("이동할 오프셋? ");
-	scanf("%d", &offset);
-	for (i = 0; i < size; i++) {
-		move_point(&arr[i], offset);
-		print_point(&arr[i]);
-	}
-}
-
-void print_point(const struct point* ptr)
-{
-	printf("(%d, %d) ", ptr->x, ptr->y);
-}
-
-void move_point(struct point* ptr, int offset)
-{
-	ptr->x += offset;
-	ptr->y += offset;
+	struct rect r = { 0 };
+	printf("직사각형의 좌하단점(x, y)? ");
+	scanf("%d %d", &r.left_bottom.x, &r.left_bottom.y);
+	printf("직사각형의 우상단점(x, y)? ");
+	scanf("%d %d", &r.right_bottom.x, &r.right_bottom.y);
+	print_rect_info(&r);
 }
