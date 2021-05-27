@@ -2,37 +2,42 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#define MAX_STR 128
 
-char* join_string(const char* s1, const char* s2)
-{
-	int len = 0;
-	char* p = NULL;
-	
-	if (s1 == NULL || s2 == NULL)
-		return NULL;                        // join_string 실패
-	
-	len = strlen(s1) + strlen(s2) + 1;
-	p = (char*)malloc(sizeof(char) * len);
-	strcpy(p, s1);
-	strcat(p, s2);
-	return p;
-}
+#define MAX 100
+#define STR_SIZE 40
+
+struct content {
+	char title[STR_SIZE];
+	int price;
+	double rate;
+};
 
 int main(void)
 {
-	char s1[MAX_STR] = "";
-	char s2[MAX_STR] = "";
-	char* s3 = NULL;
-
-	printf("첫 번째 문자열? ");
-	gets(s1);
-	printf("두 번째 문자열? ");
-	gets(s2);
+	struct content* arr[MAX] = { NULL };       // 구조체 포인터 배열 선언
+	int cnt = 0;                                       // 실제로 할당된 content 구조체의 개수
 	
-	s3 = join_string(s1, s2);
-	if (s3 != NULL) 
-		printf("연결된 문자열 : %s\n", s3);
-	free(s3);
-	s3 = NULL;
+	while (cnt < MAX) {
+		char title[STR_SIZE] = "";
+		printf("콘텐츠를 등록합니다.(. 입력 시 종료)\n제목? ");
+		gets(title);
+		
+		if (strcmp(title, ".") == 0) 
+			break;
+
+		arr[cnt] = (struct content*)malloc(sizeof(struct content));
+		strcpy(arr[cnt]->title, title);
+		printf("가격? ");
+		scanf("%d", &arr[cnt]->price);
+		arr[cnt]->rate = 5.0;
+		cnt++;
+		while (getchar() != '\n') {}               // 입력 버퍼 비우기
+	}
+	printf("%-20s %5s %4s\n", "제목", "가격", "평점");
+	for (int i = 0; i < cnt; i++) 
+		printf("%-20s %5d %4.1f\n", arr[i]->title, arr[i]->price, arr[i]->rate);
+	for (int j = 0; j < cnt; j++) {
+		free(arr[j]);
+		arr[j] = NULL;
+	}
 }
