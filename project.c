@@ -4,40 +4,45 @@
 #include <stdlib.h>
 
 #define MAX 100
-#define STR_SIZE 40
+#define STR_SIZE 10
 
-struct content {
-	char title[STR_SIZE];
-	int price;
-	double rate;
+struct employee {
+	char name[STR_SIZE];
+	char depart[STR_SIZE];
+	int salary;
 };
 
 int main(void)
 {
-	struct content* arr[MAX] = { NULL };       // 구조체 포인터 배열 선언
-	int cnt = 0;                                       // 실제로 할당된 content 구조체의 개수
-	
+	struct employee* group[MAX] = { NULL };
+	int i;
+	int cnt = 0;
 	while (cnt < MAX) {
-		char title[STR_SIZE] = "";
-		printf("콘텐츠를 등록합니다.(. 입력 시 종료)\n제목? ");
-		gets(title);
-		
-		if (strcmp(title, ".") == 0) 
+		char temp[STR_SIZE] = "";                // 임시 버퍼
+		printf("\n등록할 직원 이름? ");
+		gets(temp);
+		if (strcmp(temp, ".") == 0)
 			break;
+		group[cnt] = (struct employee*)malloc(sizeof(struct employee));
+		strcpy(group[cnt]->name, temp);
+		printf("<<포인터 group[%d]의 주소 = %d, data = %d>>\n", cnt, &group[cnt], group[cnt]);
+		printf("<group[%d]->name의 주소 = %d, data = %s>\n", cnt, &group[cnt]->name, group[cnt]->name);
 
-		arr[cnt] = (struct content*)malloc(sizeof(struct content));
-		strcpy(arr[cnt]->title, title);
-		printf("가격? ");
-		scanf("%d", &arr[cnt]->price);
-		arr[cnt]->rate = 5.0;
+		printf("부서명? ");
+		gets(group[cnt]->depart);
+		printf("<group[%d]->depart의 주소 = %d, data = %s>\n", cnt, &group[cnt]->depart, group[cnt]->depart);
+
+		printf("연봉(만원)? ");
+		scanf("%d", &group[cnt]->salary);
+		printf("<group[%d]->salary의 주소 = %d, data = %d>\n", cnt, &group[cnt]->salary, group[cnt]->salary);
 		cnt++;
-		while (getchar() != '\n') {}               // 입력 버퍼 비우기
+		while (getchar() != '\n') {}
 	}
-	printf("%-20s %5s %4s\n", "제목", "가격", "평점");
-	for (int i = 0; i < cnt; i++) 
-		printf("%-20s %5d %4.1f\n", arr[i]->title, arr[i]->price, arr[i]->rate);
-	for (int j = 0; j < cnt; j++) {
-		free(arr[j]);
-		arr[j] = NULL;
+	printf("%\n%d명의 직원을 등록했습니다.\n", cnt);
+	for (i = 0; i < cnt; i++)
+		printf("%s / %s / %d만원\n", group[i]->name, group[i]->depart, group[i]->salary);
+	for (i = 0; i < cnt; i++) {
+		free(group[i]);
+		group[i] = NULL;
 	}
 }
