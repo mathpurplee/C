@@ -1,22 +1,44 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <string.h>
+#include <math.h>
 
-int main(void) {
-	char phone[] = "010-123-4567";
-	char* p = NULL;
+struct point {
+	int x, y;
+};
 
-	printf("배열 phone[]의 주소 = %d, data = %s\n", phone, phone);  // 배열의 이름은 배열의 시작 주소 
-	for (int i = 0; i < strlen(phone); i++) 
-		printf("phone[%2d]의 주소 = %d, data = %c\n", i, &phone[i], phone[i]);
+struct line {
+	struct point start, end;
+};
+
+void print_point(struct point* ptr);
+double get_length(const struct line* ptr);
+
+int main() {
+	struct line ln = {
+		{10, 20}, {30, 40}
+	};
+
+	printf("ln의 주소 = %d\n", &ln);
+	printf("ln.start의 주소 = %d, ln.start.x의 주소 = %d, ln.start.y의 주소 = %d\n", &ln.start, &ln.start.x, &ln.start.y);
+	printf("ln.end의 주소 = %d, ln.end.x의 주소 = %d, ln.end.y의 주소 = %d\n", &ln.end, &ln.end.x, &ln.end.y);
 	printf("\n");
 
-	p = strtok(phone, "-"); // 첫 번째 토큰 p[3] = "-"의 주소 리턴
-	printf("포인터 변수 p의 주소 = %d, data = %d,  NULL확인 p[3] = %s\n", &p, p, p[3]);
+	printf("<ln.start의 좌표>\n");
+	print_point(&ln.start);
+	printf("<ln.end의 좌표>\n");
+	print_point(&ln.end);
 
-	p = strtok(NULL, "-"); // 두 번째 토큰 p[7] = "-"의 주소 리턴
-	printf("포인터 변수 p의 주소 = %d, data = %d,  NULL확인 p[3] = %s\n", &p, p, p[3]);
+	printf("\n길이 : %f\n", get_length(&ln));
+}
 
-	p = strtok(NULL, "-"); // 두 번째 토큰 p[12]= "-"의 주소 리턴
-	printf("포인터 변수 p의 주소 = %d, data = %d,  NULL확인 p[4] = %s\n", &p, p, p[4]);
+void print_point(const struct point* ptr) {
+	printf("print_point함수의 포인터변수 ptr의 주소 = %d, data = %d\n", &ptr, ptr);
+	printf("(%d, %d) \n", ptr->x, ptr->y);
+}
+
+double get_length(const struct line* ptr) {
+	printf("get_length함수의 포인터변수 ptr의 주소 = %d, data = %d\n", &ptr, ptr);
+	int dx = ptr->end.x - ptr->start.x;
+	int dy = ptr->end.y - ptr->start.y;
+	return sqrt(dx * dx + dy * dy);
 }
