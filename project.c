@@ -1,44 +1,19 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
 
-struct point {
-	int x, y;
-};
-
-struct line {
-	struct point start, end;
-};
-
-void print_point(struct point* ptr);
-double get_length(const struct line* ptr);
-
-int main() {
-	struct line ln = {
-		{10, 20}, {30, 40}
-	};
-
-	printf("ln의 주소 = %d\n", &ln);
-	printf("ln.start의 주소 = %d, ln.start.x의 주소 = %d, ln.start.y의 주소 = %d\n", &ln.start, &ln.start.x, &ln.start.y);
-	printf("ln.end의 주소 = %d, ln.end.x의 주소 = %d, ln.end.y의 주소 = %d\n", &ln.end, &ln.end.x, &ln.end.y);
-	printf("\n");
-
-	printf("<ln.start의 좌표>\n");
-	print_point(&ln.start);
-	printf("<ln.end의 좌표>\n");
-	print_point(&ln.end);
-
-	printf("\n길이 : %f\n", get_length(&ln));
+int* test_memory(int cnt) { // 리턴형이 'int 포인터형'
+	int* p = (int*)malloc(sizeof(int) * cnt);  // 함수 내에서 동적 메모리 할당
+	for (int i = 0; i < cnt; i++)
+		p[i] = 0;
+	return p; // (중요) int*형 포인터 p가 가리키는 동적메모리 주소를 리턴
 }
 
-void print_point(const struct point* ptr) {
-	printf("print_point함수의 포인터변수 ptr의 주소 = %d, data = %d\n", &ptr, ptr);
-	printf("(%d, %d) \n", ptr->x, ptr->y);
-}
-
-double get_length(const struct line* ptr) {
-	printf("get_length함수의 포인터변수 ptr의 주소 = %d, data = %d\n", &ptr, ptr);
-	int dx = ptr->end.x - ptr->start.x;
-	int dy = ptr->end.y - ptr->start.y;
-	return sqrt(dx * dx + dy * dy);
+int main(void)
+{
+	int* p = test_memory(5);
+	printf("main함수의 int 포인터 p의 주소 = %d, data = %d\n", &p, p);
+	for (int i = 0; i < 5; i++) {
+		printf("포인터 p가 가리키는 동적 메모리 p[%d]의 주소 = %d, data = %d\n", i, &p[i], *(p+i));
+	}
 }
