@@ -1,49 +1,45 @@
-#define _CRT_SECURE_NO_WARNINGS
-#define MAX_STR 128
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-char* join_string(const char* s1, const char* s2) {
-	int len = 0;
-	char* p = NULL;
+typedef struct node {
+	int data;
+	struct node* link;
+} node;   // struct node = node
 
-	if (s1 == NULL || s2 == NULL) // join_string 실패
-		return NULL;
+node *new_node = NULL,   *head = NULL, *temp = NULL;  // 전역변수 -  stack area
 
-	printf("포인터 s1의 주소 = %d, data = %d, size = %d\n", &s1, s1, sizeof(s1));
-	printf("포인터 s2의 주소 = %d, data = %d, size = %d\n", &s2, s2, sizeof(s2));
+int main(void) {
+	int num;
+	printf("*new_node의 주소 = %d, 값 = %x\n", &new_node, new_node);
+	printf("*head의 주소 = %d, 값 = %x\n", &head, head);
+	printf("*temp의 주소 = %d, 값 = %x\n", &temp, temp);
 
-	len = strlen(s1) + strlen(s2) + 1;
-	p = (char*)malloc(sizeof(char) * len); // 함수 내의 포인터 변수 p에 동적메모리 할당, p에는 동적메모리 주소 리턴
+	new_node = (node*)malloc(sizeof(node));
+	new_node->data = 1;
+	new_node->link = NULL;
+	head = temp = new_node;
 
-	strcpy(p, s1); // copy
-	strcat(p, s2); // connect
-
-	printf("포인터 p의 주소 = %d, data = %d, size = %d\n", &p, p, sizeof(p));
-	return p; // (중요) char*형 포인터 p가 가리키는 동적메모리 주소 리턴
-}
-
-int main(void)
-{
-	char s1[MAX_STR] = "";
-	char s2[MAX_STR] = "";
-	char* s3 = NULL;
-
-	printf("배열 s1의 주소 = %d, data = %d, size = %d\n", s1, s1[0], sizeof(s1));
-	printf("배열 s2의 주소 = %d, data = %d, size = %d\n", s2, s2[0], sizeof(s2));
-	printf("포인터 s3의 주소 = %d, data = %d, size = %d\n", s2, s2[0], sizeof(s2));
-
-	printf("첫 번째 문자열? ");
-	gets(s1);
-	printf("두 번째 문자열? ");
-	gets(s2);
-	s3 = join_string(s1, s2);
+	printf("*head->data = %d, *temp->data = %d\n", &head->data, &temp->data);
+	printf("new_node->data의 주소 = %d, 값 = %d\n", &new_node->data, new_node->data);
 	
-	if (s3 != NULL) {
-		printf("포인터 s3의 주소 = %d, data = %d, size = %d\n", &s3, s3, sizeof(s3));
-		printf("연결된 문자열 : %s\n", s3);
+	num = 2;
+	while (num <= 10) {
+		new_node = (node*)malloc(sizeof(node));  // 새로운 주소로 동적 메모리 할당
+		if (new_node == NULL) {
+			printf("memory allocation error\n");
+			return(0);
+		}
+		new_node->data = num; 
+		new_node->link = NULL;
+		temp->link = new_node;  // 새로 동적 메모리 할당한 주소(포인터 new_node의 값)를 temp->link에 임시저장
+		temp = new_node; // 
+		num += 1;
+		printf("new_node->data의 주소 = %d, 값 = %d\n", &new_node->data, new_node->data);
+	 }
+	 
+	temp = head;
+	while (temp != NULL) {
+		printf("temp->data의 주소 = %d, 값 = %d\n", &temp->data, temp->data);
+		temp = temp->link;
 	}
-	free(s3);
-	s3 = NULL;
 }
